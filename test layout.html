@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Example Graphs</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Nova+Square" rel="stylesheet"> 
+  <script src="https://d3js.org/d3.v3.js"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <style>
+    body {
+      background-color: #fff;
+      color: #333;
+      font-family: verdana, arial, helvetica, sans-serif;
+      line-height: 18px;
+      margin: 33px;
+    }
+
+     ol, ul, td {
+      font-family: verdana, arial, helvetica, sans-serif;
+      font-size: 13px;
+      line-height: 18px;
+      margin: 33px;
+    }
+
+
+
+    div {
+      &.field, &.actions {
+        margin-bottom: 10px;
+      }
+    }
+
+
+    label {
+      display: block;
+    }
+
+    .axis path, .axis line {
+        fill: none;
+        stroke: #fff;
+      }
+    .axis text {
+        font-size: 8px;
+      }
+    .bar {
+        fill: #7cb5ec;
+      }
+    .bar:hover {
+        fill: #434348;
+      }
+    .wbar {
+        fill: #f45b5b;
+    }
+    .wbar:hover {
+        fill: #434348;
+      }
+    .cfbar {
+        fill: #7cb5ec;
+    }
+    .cfbar:hover {
+        opacity: .8;
+      }
+
+    .Tcfbar {
+        fill: #f45b5b;
+    }
+    .Tcfbar:hover {
+        opacity: .8;
+      }
+    svg text.label {
+      fill:white;
+      font: 15px;  
+      font-weight: 400;
+      text-anchor: middle;
+    }
+
+    .toolTip {
+        position: absolute;
+        display: none;
+        width: auto;
+        height: auto;
+        background: none repeat scroll 0 0 white;
+        border: 0 none;
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font: 12px sans-serif;
+        padding: 5px;
+        text-align: center;
+    }
+
+    svg text.label {
+      fill:black;
+      font: 15px;  
+      font-weight: 400;
+      text-anchor: middle;
+    }
+
+    ul.borderless-tabs {
+        border-top: 0px solid #333;
+        border-bottom: none;
+        margin-top: 0;
+
+
+    }
+    .borderless-tabs li.active a, .borderless-tabs li a:focus{
+        background-color: #333;
+        color: #fcfcfc;
+        border-radius: 0px 0px 20px 20px;
+    }
+
+    .borderless-tabs li a{
+        background-color: #333;
+        color: #fcfcfc;
+        border-radius: 0px 0px 20px 20px;
+    }
+
+    .borderless-tabs li a:hover{
+        background-color: #eee;
+        color: #333;
+        border-radius: 0px 0px 20px 20px;
+    }
+
+    .panel-dark {
+        border-color: #333;
+    }
+
+    .panel-dark .panel-heading {
+        background-color: #555;
+        color: white;
+    }
+
+    .glyphicon-menu-down {
+        transition: transform .35s ease-in;
+    }
+
+    .glyphicon-menu-down.rotate{
+        transform: rotate(180deg);
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+  	<div class="container-fluid">
+  		<div class="navbar-header">
+  			<a id="headtitle" class="navbar-brand" href="#" > General Coding Aptitude Test </a>
+  		</div>
+  		<ul class="nav navbar-nav">
+  		</ul>
+  		<ul class="nav navbar-nav pull-right">
+  			<li><a href="#"><span class="glyphicon glyphicon-home"></span> </a></li>
+  			<li id="usri" class="visible-lg-block visible-md-block visible-sm-block show-usr" data-usr="" style="cursor: pointer;"><a>John Elgin</a></li>
+  			<li class=""><a href="#"><span class="glyphicon glyphicon-off"></span></a></li>
+  		</ul>
+  	</div>
+  </nav>
+<br><br>
+<!-- Questions -->
+
+<div class="panel-group">
+  <div class="panel panel-dark">
+    <div class="panel-heading text-center" data-toggle="collapse" href="#Question1" style="cursor: pointer;">
+      <h4 class="panel-title">
+        Question 1
+        <span class="glyphicon glyphicon-menu-down rotate pull-right"></span>
+      </h4>
+    </div>
+    <div id="Question1" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <!-- Graphs -->
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 ">
+            <div class="well">
+              <p>Analyse the following Boolean problems:</p>
+
+              <p>a. If statement X is true and statement Y is false, statement X <kbd>AND</kbd> statement Y would be: 
+                <select class="form-control">
+                  <option value="">Select One</option>
+                  <option value="TRUE">TRUE</option>
+                  <option value="FALSE">FALSE</option>
+                </select>
+              </p>
+              <p>b. If statement X is true and statement Y is false, statement X <kbd>OR</kbd> statement Y would be:
+                <select class="form-control">
+                  <option value="">Select One</option>
+                  <option value="TRUE">TRUE</option>
+                  <option value="FALSE">FALSE</option>
+                </select>
+              </p>
+            </div>
+          </div>
+          
+        </div>
+
+        <br>
+        <div class="well" style="min-height: 1px; padding: 0;">
+          
+          <div id="hintone" class="container collapse">
+
+            <div class="container">
+              
+              <div class="row">          
+                
+                <ul class="list-group">
+
+                  <li class="list-group-item" data-toggle="collapse" href="#org" style="cursor: pointer;">
+                    <h5 class="text-center">Red traffic lights mean "Stop" <kbd>AND</kbd> a pickle is a material we use to build houses.</h5>
+                  </li>
+
+                  <li class="list-group-item" data-toggle="collapse" href="#org" style="cursor: pointer;">
+                    <h5 class="text-center">Green traffic lights mean "Go" <kbd>OR</kbd> a dog is typically the size of an elephant.</h5>
+                  </li>
+
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="nav nav-tabs borderless-tabs">
+    <li class="pull-right"><a data-toggle="collapse" href="#hintone" style="cursor: pointer;"><span class="fa fa-tachometer" aria-hidden="true"> </span> Hint</a>
+    </li>
+  </ul>
+</div>
+
+<div class="panel-group">
+  <div class="panel panel-dark">
+    <div class="panel-heading text-center" data-toggle="collapse" href="#Question2" style="cursor: pointer;">
+      <h4 class="panel-title">
+        Question 2
+        <span class="glyphicon glyphicon-menu-down rotate pull-right"></span>
+      </h4>
+    </div>
+    <div id="Question2" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <!-- Graphs -->
+        <div class="row">
+          
+          <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <div class="well">
+
+                  <p>The table to the right lists people and some attributes. Write a statement that will only capture "Ted", without typing "Ted".</p>
+                  <p><code>Example to capture "Susan": She is Female, and owns a Bird.</code></p>
+
+                  <textarea class="form-control"></textarea>
+
+            </div>
+          </div>
+          
+          <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <div class="well">
+
+              <table class="table">
+                <thead>
+                  <th>Name</th>
+                  <th>Gender</th>
+                  <th>Pet</th>
+                  <th>Home</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Bob</td>
+                    <td>Male</td>
+                    <td>Dog</td>
+                    <td>Apartment</td>
+                  </tr>
+                  <tr>
+                    <td>Susan</td>
+                    <td>Female</td>
+                    <td>Bird</td>
+                    <td>House</td>
+                  </tr>
+                  <tr>
+                    <td>Ted</td>
+                    <td>Male</td>
+                    <td>Cat</td>
+                    <td>House</td>
+                  </tr>
+                  <tr>
+                    <td>Lisa</td>
+                    <td>Female</td>
+                    <td>Cat</td>
+                    <td>Apartment</td>
+                  </tr>
+                  <tr>
+                    <td>Dan</td>
+                    <td>Male</td>
+                    <td>Bird</td>
+                    <td>Apartment</td>
+                  </tr>
+                  <tr>
+                    <td>Lucy</td>
+                    <td>Female</td>
+                    <td>Dog</td>
+                    <td>House</td>
+                  </tr>
+                  <tr>
+                    <td>Don</td>
+                    <td>Male</td>
+                    <td>Bird</td>
+                    <td>House</td>
+                  </tr>
+                  <tr>
+                    <td>Liam</td>
+                    <td>Male</td>
+                    <td>Dog</td>
+                    <td>House</td>
+                  </tr>
+                  <tr>
+                    <td>Rachel</td>
+                    <td>Female</td>
+                    <td>Dog</td>
+                    <td>Apartment</td>
+                  </tr>
+                  <tr>
+                    <td>Cindy</td>
+                    <td>Female</td>
+                    <td>Cat</td>
+                    <td>House</td>
+                  </tr>
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+          
+          
+        
+          
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 ">
+            <div class="well">
+              <p>How did you get this answer?</p>
+
+              <textarea class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="well" style="min-height: 1px; padding: 0;">
+          
+          <div id="hinttwo" class="container collapse ">
+
+            <div class="container">
+              
+              <div class="row text-center">          
+                
+                <ul class="list-group">
+
+                  <li class="list-group-item" data-toggle="collapse" href="#hinttwoli" style="cursor: pointer;">
+                    <h5 class="text-center">What is unique about Ted?</h5>
+                  </li>
+
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="nav nav-tabs borderless-tabs">
+    <li class="pull-right"><a data-toggle="collapse" href="#hinttwo" style="cursor: pointer;"><span class="fa fa-tachometer" aria-hidden="true"> </span> Hint</a>
+    </li>
+  </ul>
+</div>
+
+<div class="panel-group">
+  <div class="panel panel-dark">
+    <div class="panel-heading text-center" data-toggle="collapse" href="#Question3" style="cursor: pointer;">
+      <h4 class="panel-title">
+        Question 3
+        <span class="glyphicon glyphicon-menu-down rotate pull-right"></span>
+      </h4>
+    </div>
+    <div id="Question3" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <!-- Graphs -->
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 ">
+            <div class="well">
+              <p>How would you return information in table 2 for people in table 1 who lived in a house?</p>
+              <textarea class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <div class="well">
+              <h4>Table 1</h4>
+              <table class="table">
+                <thead>
+                  <th>Name</th>
+                  <th>Gender</th>
+                  <th>Pet</th>
+                  <th>Home</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Bob</td>
+                    <td>Male</td>
+                    <td>Dog</td>
+                    <td>Apartment</td>
+                  </tr>
+                  <tr>
+                    <td>Susan</td>
+                    <td>Female</td>
+                    <td>Bird</td>
+                    <td>House</td>
+                  </tr>
+                  <tr>
+                    <td>Ted</td>
+                    <td>Male</td>
+                    <td>Cat</td>
+                    <td>House</td>
+                  </tr>
+                  <tr>
+                    <td>Lisa</td>
+                    <td>Female</td>
+                    <td>Cat</td>
+                    <td>Apartment</td>
+                  </tr>
+                  <tr>
+                    <td>Dan</td>
+                    <td>Male</td>
+                    <td>Bird</td>
+                    <td>Apartment</td>
+                  </tr>
+                  <tr>
+                    <td>Lucy</td>
+                    <td>Female</td>
+                    <td>Dog</td>
+                    <td>House</td>
+                  </tr>
+                  <tr>
+                    <td>Don</td>
+                    <td>Male</td>
+                    <td>Bird</td>
+                    <td>House</td>
+                  </tr>
+                  <tr>
+                    <td>Liam</td>
+                    <td>Male</td>
+                    <td>Dog</td>
+                    <td>House</td>
+                  </tr>
+                  <tr>
+                    <td>Rachel</td>
+                    <td>Female</td>
+                    <td>Dog</td>
+                    <td>Apartment</td>
+                  </tr>
+                  <tr>
+                    <td>Cindy</td>
+                    <td>Female</td>
+                    <td>Cat</td>
+                    <td>House</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-6 ">
+            <div class="well">
+              <h4>Table 2</h4>
+              <table class="table">
+                <thead>
+                  <th>Name</th>
+                  <th>Car</th>
+                  <th>Employer</th>
+                  <th>State</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Bob</td>
+                    <td>Fiat</td>
+                    <td>Kroger</td>
+                    <td>Ohio</td>
+                  </tr>
+                  <tr>
+                    <td>Susan</td>
+                    <td>Ford</td>
+                    <td>Amazon</td>
+                    <td>Virginia</td>
+                  </tr>
+                  <tr>
+                    <td>Ted</td>
+                    <td>Fiat</td>
+                    <td>Walmart</td>
+                    <td>Florida</td>
+                  </tr>
+                  <tr>
+                    <td>Lisa</td>
+                    <td>Chevy</td>
+                    <td>Kroger</td>
+                    <td>Ohio</td>
+                  </tr>
+                  <tr>
+                    <td>Dan</td>
+                    <td>Ford</td>
+                    <td>Amazon</td>
+                    <td>Washington</td>
+                  </tr>
+                  <tr>
+                    <td>Lucy</td>
+                    <td>GMC</td>
+                    <td>Ford</td>
+                    <td>Nebraska</td>
+                  </tr>
+                  <tr>
+                    <td>Don</td>
+                    <td>GMC</td>
+                    <td>Apple</td>
+                    <td>Texas</td>
+                  </tr>
+                  <tr>
+                    <td>Liam</td>
+                    <td>Fiat</td>
+                    <td>Walmart</td>
+                    <td>Kentucky</td>
+                  </tr>
+                  <tr>
+                    <td>Rachel</td>
+                    <td>Fiat</td>
+                    <td>Apple</td>
+                    <td>Ohio</td>
+                  </tr>
+                  <tr>
+                    <td>Cindy</td>
+                    <td>Ford</td>
+                    <td>Citi Bank</td>
+                    <td>California</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+          
+          
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 ">
+            <div class="well">
+              <p>How did you get this answer?</p>
+
+              <textarea class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="well" style="min-height: 1px; padding: 0;">
+          
+          <div id="hintthree" class="container collapse ">
+
+            <div class="container">
+              
+              <div class="row text-center">          
+                
+                <ul class="list-group">
+
+                  <li class="list-group-item" data-toggle="collapse" href="#hintli" style="cursor: pointer;">
+                    <h5 class="text-center">What do the two tables have in common?</h5>
+                  </li>
+
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="nav nav-tabs borderless-tabs">
+    <li class="pull-right"><a data-toggle="collapse" href="#hintthree" style="cursor: pointer;"><span class="fa fa-tachometer" aria-hidden="true"> </span> Hint</a>
+    </li>
+  </ul>
+</div>
+
+
+<div class="panel-group">
+  <div class="panel panel-dark">
+    <div class="panel-heading text-center" data-toggle="collapse" href="#Question4" style="cursor: pointer;">
+      <h4 class="panel-title">
+        Question 4
+        <span class="glyphicon glyphicon-menu-down rotate pull-right"></span>
+      </h4>
+    </div>
+    <div id="Question4" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <!-- Graphs -->
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 ">
+            <div class="well">
+              <p>For the follwoing 2 bin locations, give a process that will return only the aisle. There should only be one process that gives the desired answer for both.</p>
+
+              <p><code>a. bin = "P-1-A15D103" - Desired Outcome: "P-1-A15"</code></p>
+              <p><code>b. bin = "P-1-A3D23"   - Desired Outcome: "P-1-A3"</code></p>
+
+              <textarea class="form-control"></textarea>
+            </div>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 ">
+            <div class="well">
+              <p>How did you get this answer?</p>
+
+              <textarea class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="well" style="min-height: 1px; padding: 0;">
+          
+          <div id="hintfour" class="container collapse">
+
+            <div class="container">
+              
+              <div class="row">          
+                
+                <ul class="list-group">
+
+                  <li class="list-group-item" data-toggle="collapse" href="#org" style="cursor: pointer;">
+                    <h5 class="text-center">There should only be one process that gives the correct aisle for both bins.</h5>
+                  </li>
+
+                  <li class="list-group-item" data-toggle="collapse" href="#org" style="cursor: pointer;">
+                    <h5 class="text-center">What do the bins have in common? Where do they differ?</h5>
+                  </li>
+
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="nav nav-tabs borderless-tabs">
+    <li class="pull-right"><a data-toggle="collapse" href="#hintfour" style="cursor: pointer;"><span class="fa fa-tachometer" aria-hidden="true"> </span> Hint</a>
+    </li>
+  </ul>
+</div>
+
+<div class="panel-group">
+  <div class="panel panel-dark">
+    <div class="panel-heading text-center" data-toggle="collapse" href="#Question5" style="cursor: pointer;">
+      <h4 class="panel-title">
+        Question 5
+        <span class="glyphicon glyphicon-menu-down rotate pull-right"></span>
+      </h4>
+    </div>
+    <div id="Question5" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <!-- Graphs -->
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 ">
+            <div class="well">
+              <p>Consider the following series: <code>[3, 4, 6, 9, 13, ____]</code>. What comes next?</p>
+
+              <textarea class="form-control"></textarea>
+            </div>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 ">
+            <div class="well">
+              <p>How did you get this answer?</p>
+
+              <textarea class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="well" style="min-height: 1px; padding: 0;">
+          
+          <div id="hintfive" class="container collapse">
+
+            <div class="container">
+              
+              <div class="row">          
+                
+                <ul class="list-group">
+
+                  <li class="list-group-item" data-toggle="collapse" href="#org" style="cursor: pointer;">
+                    <h5 class="text-center">These numbers are integers. Rounding should not be needed.</h5>
+                  </li>
+
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="nav nav-tabs borderless-tabs">
+    <li class="pull-right"><a data-toggle="collapse" href="#hintfive" style="cursor: pointer;"><span class="fa fa-tachometer" aria-hidden="true"> </span> Hint</a>
+    </li>
+  </ul>
+</div>
+
+<div class="panel-group">
+  <div class="panel panel-dark">
+    <div class="panel-heading text-center" data-toggle="collapse" href="#Question6" style="cursor: pointer;">
+      <h4 class="panel-title">
+        Question 6
+        <span class="glyphicon glyphicon-menu-down rotate pull-right"></span>
+      </h4>
+    </div>
+    <div id="Question6" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <!-- Graphs -->
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 ">
+            <div class="well">
+              <p>Using the flowchart below, person <kbd>!1!</kbd> is:</p>
+
+              <p> 
+                <select class="form-control">
+                  <option value="">Select One</option>
+                  <option value="a">Married, with children.</option>
+                  <option value="b">Married, with at least one son.</option>
+                  <option value="c">Unmarried, with at least one daughter.</option>
+                  <option value="d">Unmarried, with at least one son.</option>
+                  <option value="e">Unmarried, with no children.</option>
+                </select>
+              </p>
+              
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-12 ">
+            <div class="well">
+              
+              <img src="q5chart.JPG" height="100%" width="100%" alt="hello">
+
+            </div>
+          </div>
+          
+        </div>
+        <br>
+        <div class="well" style="min-height: 1px; padding: 0;">
+          
+          <div id="hintsix" class="container collapse">
+
+            <div class="container">
+              
+              <div class="row">          
+                
+                <ul class="list-group">
+
+                  <li class="list-group-item" data-toggle="collapse" href="#org" style="cursor: pointer;">
+                    <h5 class="text-center">Find <kbd>!1!</kbd> and follow the flowchart backwards</h5>
+                  </li>
+
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="nav nav-tabs borderless-tabs">
+    <li class="pull-right"><a data-toggle="collapse" href="#hintsix" style="cursor: pointer;"><span class="fa fa-tachometer" aria-hidden="true"> </span> Hint</a>
+    </li>
+  </ul>
+</div>
+
+<div class="panel-group">
+  <div class="panel panel-dark">
+    <div class="panel-heading text-center" data-toggle="collapse" href="#Question7" style="cursor: pointer;">
+      <h4 class="panel-title">
+        Question 7
+        <span class="glyphicon glyphicon-menu-down rotate pull-right"></span>
+      </h4>
+    </div>
+    <div id="Question7" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <!-- Graphs -->
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 ">
+            <div class="well">
+              <p>Read the following code:</p>
+
+                <p><code>job_level = Array.new</code></p>
+                <p><code>level = your.title</code></p>
+                <br>
+                <p><code>specialist = level.include? "Specialist"</code></p>
+                <p><code>manager = level.include? "Manager"</code></p>
+                <p><code>regional = level.include? "Regional"</code></p>
+                <p><code>senior = level.include? "Senior"</code></p>
+                <br>
+                <p><code>job_level << specialist</code></p>
+                <p><code>job_level << manager</code></p>
+                <p><code>job_level << regional</code></p>
+                <p><code>job_level << senior</code></p>
+              
+              <p>Given that <code>level = "Senior Specialist"</code> returns <code>job_level = [true, false, false, true]</code>, <code>level = "Senior Regional Manager"</code> returns <code>job_level = [<kbd>?</kbd>]</code></p>
+
+              <textarea class="form-control"></textarea>
+            </div>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12 ">
+            <div class="well">
+              <p>How did you get this answer?</p>
+
+              <textarea class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="well" style="min-height: 1px; padding: 0;">
+          
+          <div id="hintseven" class="container collapse">
+
+            <div class="container">
+              
+              <div class="row">          
+                
+                <ul class="list-group">
+
+                  <li class="list-group-item" data-toggle="collapse" href="#org" style="cursor: pointer;">
+                    <h5 class="text-center">What does '.include?' mean?</h5>
+                  </li>
+
+                  <li class="list-group-item" data-toggle="collapse" href="#org" style="cursor: pointer;">
+                    <h5 class="text-center">my.title = "Loss Prevention Specialist". Does my.title include "Specialist"?</h5>
+                  </li>
+
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul class="nav nav-tabs borderless-tabs">
+    <li class="pull-right"><a data-toggle="collapse" href="#hintseven" style="cursor: pointer;"><span class="fa fa-tachometer" aria-hidden="true"> </span> Hint</a>
+    </li>
+  </ul>
+</div>
+<script>
+  var rotation = 0;
+
+  jQuery.fn.rotate = function(degrees) {
+    $(this).css({'-webkit-transform' : 'rotate('+ degrees +'deg)',
+                   '-moz-transform' : 'rotate('+ degrees +'deg)',
+                   '-ms-transform' : 'rotate('+ degrees +'deg)',
+                   'transform' : 'rotate('+ degrees +'deg)'});
+    return $(this);
+  };
+  $('.panel-heading').click(function() {
+    rotation += 180;
+    panelID = $(this).id
+    //$(this).find("h4 span").rotate(rotation);
+    var caret = $(this).find("span:first")
+    if (caret.hasClass("rotate")) {
+      caret.removeClass("rotate");
+    } else {
+      caret.addClass("rotate");
+    }
+        
+  });
+</script>
+</body>
+</html>
+
+
